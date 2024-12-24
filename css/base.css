@@ -1,0 +1,95 @@
+* {
+  font-family: "Titillium Web", serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
+}
+
+.clock {
+  display: inline-block;
+  font-size: 28px;
+  line-height: 40px;
+  text-align: center;
+  color: black;
+  border-radius: 5px;
+  border-bottom: 1px solid #FFB6CD;
+  padding: 5px 10px 0 10px; 
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(255,182,205,0.5) 100%);	
+}
+
+.timetable {
+	margin: 10px 0 0 0;
+}
+
+.foo {
+	position: absolute;
+	left: 150px;
+	top: 70px;
+	width: 150px;
+}
+
+.titillium-web-extralight {
+  font-family: "Titillium Web", serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.titillium-web-light {
+  font-family: "Titillium Web", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.titillium-web-regular {
+  font-family: "Titillium Web", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.titillium-web-semibold {
+  font-family: "Titillium Web", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.titillium-web-bold {
+  font-family: "Titillium Web", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.titillium-web-black {
+  font-family: "Titillium Web", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.titillium-web-extralight-italic {
+  font-family: "Titillium Web", serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.titillium-web-light-italic {
+  font-family: "Titillium Web", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.titillium-web-regular-italic {
+  font-family: "Titillium Web", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.titillium-web-semibold-italic {
+  font-family: "Titillium Web", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.titillium-web-bold-italic {
+  font-family: "Titillium Web", serif;
+  font-weight: 700;
+  font-style: italic;
+}

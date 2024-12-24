@@ -4,44 +4,101 @@
 <head>
   <meta charset="UTF-8">
   <title>A simple clock</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
 </head>
 
 <body translate="no" >
-  <div id="output" 
-       style=	"display: inline-block;
+  <div id="divClock" class="clock"></div>
+  <p id="pTimeTable" class="timetable">
+	1️⃣ 08:00 - 09:40<br>
+	2️⃣ 10:00 - 11:40<br>
+	🍱 12:00 - 13:00<br>
+	3️⃣ 13:00 - 14:40<br>
+	4️⃣ 15:00 - 16:40<br>
+	5️⃣ 17:00 - 18:40<br>
+	🍱 19:00 - 20:00<br>
+	6️⃣ 20:00 - 21:40<br>
+	7️⃣ 22:00 - 23:40<br>
+  </p>
+  <img id="img" class="foo" src="foo2.png" />
+  <!--
+  <br>
+  <br>
+  <div id="divTimer" 
+       style="display: inline-block;
 		font-family: monospace;
 		font-size: 28px;
 		text-align: right;
 		color: black; 
 		border-radius: 10px; 
-		padding: 10px; 
+		padding: 5px; 
 		background-color: rgba(0, 0, 0, 0.1);">
   </div>
-
+  <br>
+  <button id="btnStart" onClick="javascript:start()">Start</button>
+  <button id="btnStop" onClick="javascript:stop()">Stop</button>
+  <button id="btnReset" onClick="javascript:reset()">Reset</button>
+  -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'></script>
-  <script>
-// https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-var urlParams;
-(function () {
-    var match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
-    urlParams = {};
-    while (match = search.exec(query))
-       urlParams[decode(match[1])] = decode(match[2]);
-})();
-var output = document.getElementById("output");
-if (urlParams["style"]) output.setAttribute("style", urlParams["style"]);
-if (urlParams["bodyStyle"]) document.body.setAttribute("style", urlParams["bodyStyle"]);
-var c;
-setInterval(
-c = function() {
-	output.innerText = moment().format(urlParams["format"] || 'YYYY-MM-DD HH:mm:ss');
-}, 1000);
-c();
+  <script>	
+	var urlParams;
+	(function () {
+		var match,
+			pl     = /\+/g,  // Regex for replacing addition symbol with a space
+			search = /([^&=]+)=?([^&]*)/g,
+			decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+			query  = window.location.search.substring(1);
+			urlParams = {}
+		;
+		
+		while (match = search.exec(query)) {
+			urlParams[decode(match[1])] = decode(match[2]);
+		}
+	})();
+	
+	var divClock = document.getElementById("divClock");
+	if (urlParams["style"]) {
+		divClock.setAttribute("style", urlParams["style"]);
+	}
+	
+	if (urlParams["bodyStyle"]) {
+		document.body.setAttribute("style", urlParams["bodyStyle"]);
+	}
+	
+	var c;
+	setInterval(
+	c = function() {
+		divClock.innerText = moment().format(urlParams["format"] || 'YYYY-MM-DD HH:mm:ss');
+	}, 1000);
+	c();
+
+	var imgList = ["foo.png", "foo2.png", "foo3.png"]
+	var img = document.getElementById("img");
+	var i;
+	setInterval(
+	i = function() {
+		var a = parseInt(moment().format(urlParams["format"] || 'HH')) % 3
+		img.src = imgList[a];
+	}, 30000);
+	i();
+
+	//var divTimer = document.getElementById("divTimer");
+	var timer = 0;
+	function start() {
+		divTimer.innerText = moment().format(urlParams["format"] || 'HH:mm:ss');
+	}
+	
+	function stop() {
+	
+	}
+	
+	function reset() {
+		timer = 0;
+	}
+	
   </script>
 </body>
 </html>
