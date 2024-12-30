@@ -11,10 +11,7 @@
   <link rel="stylesheet" href="css/clock.css">
 </head>
 
-<body translate="no" >
-  <div>
-    <img id="img" class="foo" src="foo2.png" />
-  </div>
+<body translate="no">
   <div id="divClock" class="digit_clock"></div>
   <p id="pTimeTable" class="timetable">
 	1️⃣ 08:00 - 09:40<br>
@@ -27,91 +24,27 @@
 	6️⃣ 20:00 - 21:40<br>
 	7️⃣ 22:00 - 23:40<br>
   </p>
-  <!--
-  <br>
-  <br>
-  <div id="divTimer" 
-       style="display: inline-block;
-		font-family: monospace;
-		font-size: 28px;
-		text-align: right;
-		color: black; 
-		border-radius: 10px; 
-		padding: 5px; 
-		background-color: rgba(0, 0, 0, 0.1);">
-  </div>
-  <br>
-  <button id="btnStart" onClick="javascript:start()">Start</button>
-  <button id="btnStop" onClick="javascript:stop()">Stop</button>
-  <button id="btnReset" onClick="javascript:reset()">Reset</button>
-  -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'></script>
-  <script>	
-	var urlParams;
-	(function () {
-		var match,
-			pl     = /\+/g,  // Regex for replacing addition symbol with a space
-			search = /([^&=]+)=?([^&]*)/g,
-			decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-			query  = window.location.search.substring(1);
-			urlParams = {}
-		;
-		
-		while (match = search.exec(query)) {
-			urlParams[decode(match[1])] = decode(match[2]);
+  <script>
+	var dDay = "";
+	function getDday() {
+		var targetDay = moment().add(1, "year").format("YYYY") + "0427";
+		var calcDay = moment().diff(moment(targetDay), "days");
+		if (calcDay < 0) {
+			return "D" + calcDay;
+		} else {
+			return "D-Day";
 		}
-	})();
-	
+	}
+	dDay = getDday();
+  
 	var divClock = document.getElementById("divClock");
-	if (urlParams["style"]) {
-		divClock.setAttribute("style", urlParams["style"]);
-	}
-	
-	if (urlParams["bodyStyle"]) {
-		document.body.setAttribute("style", urlParams["bodyStyle"]);
-	}
-	
 	var c;
 	setInterval(
 	c = function() {
-		divClock.innerText = moment().format(urlParams["format"] || 'MM/DD HH:mm:ss');
+		divClock.innerText = dDay + "\n" + moment().format("MM/DD") + "\n" + moment().format("HH:mm:ss");
 	}, 1000);
 	c();
-
-	var imgList = ["foo.png", "foo2.png", "foo3.png", "foo4.jpg"]
-	var img = document.getElementById("img");
-	var i;
-	setInterval(
-	i = function() {
-		var a = parseInt(moment().format(urlParams["format"] || 'HH')) % imgList.length
-		img.src = imgList[a];
-	}, 600000);
-	i();
-
-	const secondHand = document.querySelector('.second-hand');
-	const minsHand = document.querySelector('.min-hand');
-	const hourHand = document.querySelector('.hour-hand');
-
-	function setDate() {
-	  const now = new Date();
-
-	  const seconds = now.getSeconds();
-	  const secondsDegrees = ((seconds / 60) * 360) + 90;
-	  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-
-	  const mins = now.getMinutes();
-	  const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
-	  minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-
-	  const hour = now.getHours();
-	  const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
-	  hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-	}
-
-	setInterval(setDate, 1000);
-
-	setDate();
-	
   </script>
 </body>
 </html>
