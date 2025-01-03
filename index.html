@@ -29,12 +29,20 @@
   <script>
 	var dDay = "";
 	function getDday() {
-		var targetDay = moment().add(1, "year").format("YYYY") + "0427";
-		var calcDay = moment().diff(moment(targetDay), "days");
-		if (calcDay < 0) {
-			return "D" + calcDay;
-		} else {
+		var targetDay = "0427";
+		var curYearDay = moment().format("YYYY") + targetDay;
+		var nextYearDay = moment().add(1, "year").format("YYYY") + targetDay;
+		
+		
+		var curCalcDay = moment().diff(moment(curYearDay), "days");
+		var nextCalcDay = moment().diff(moment(nextYearDay), "days");
+		
+		if (curCalcDay === 0) {
 			return "D-Day";
+		} else if (curCalcDay < 0) {
+			return "D" + curCalcDay;
+		} else {
+			return "D" + nextCalcDay;
 		}
 	}
 	dDay = getDday();
