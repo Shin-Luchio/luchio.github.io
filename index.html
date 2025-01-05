@@ -15,24 +15,21 @@
   <div id="divClock" class="digit_clock"></div>
   <p id="pTimeTable" class="timetable">
 	&lt;Timetable&gt;<br>
-	1.&nbsp;&nbsp;08:00 - 09:40<br>
-	2.&nbsp;&nbsp;10:00 - 11:40<br>
+	&nbsp;1.&nbsp;08:00 - 09:40<br>
+	&nbsp;2.&nbsp;10:00 - 11:40<br>
 	🍙12:00 - 13:00<br>
-	3.&nbsp;&nbsp;13:00 - 14:40<br>
-	4.&nbsp;&nbsp;15:00 - 16:40<br>
-	5.&nbsp;&nbsp;17:00 - 18:40<br>
+	&nbsp;3.&nbsp;13:00 - 14:40<br>
+	&nbsp;4.&nbsp;15:00 - 16:40<br>
+	&nbsp;5.&nbsp;17:00 - 18:40<br>
 	🍙19:00 - 20:00<br>
-	6.&nbsp;&nbsp;20:00 - 21:40<br>
-	7.&nbsp;&nbsp;22:00 - 23:40<br>
+	&nbsp;6.&nbsp;20:00 - 21:40<br>
+	&nbsp;7.&nbsp;22:00 - 23:40<br>
   </p>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'></script>
   <script>
-	var dDay = "";
-	function getDday() {
-		var targetDay = "0427";
+	function getDday(targetDay) {
 		var curYearDay = moment().format("YYYY") + targetDay;
-		var nextYearDay = moment().add(1, "year").format("YYYY") + targetDay;
-		
+		var nextYearDay = moment().add(1, "year").format("YYYY") + targetDay;		
 		
 		var curCalcDay = moment().diff(moment(curYearDay), "days");
 		var nextCalcDay = moment().diff(moment(nextYearDay), "days");
@@ -45,14 +42,24 @@
 			return "D" + nextCalcDay;
 		}
 	}
-	dDay = getDday();
   
 	var divClock = document.getElementById("divClock");
 	var c;
 	setInterval(
 	c = function() {
-		divClock.innerText = dDay + "\n" + moment().format("MM/DD") + "\n" + moment().format("HH:mm:ss");
-	}, 1000);
+		divClock.innerHTML =
+			"<div>" + 
+				"<span class='order'>1st</span>" +
+				"<span class='day'>" + getDday("0216") + "</span>" +
+			"</div>" +
+			"<div style='border-bottom:1px solid lightgray;'>" + 
+				"<span class='order'>2nd</span>" +
+				"<span class='day'>" + getDday("0512") + "</span>" +
+			"</div>" +
+			moment().format("MM/DD") + "<br>" +
+			moment().format("HH:mm:ss")
+		;
+	}, 100000);
 	c();
   </script>
 </body>
